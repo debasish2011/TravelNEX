@@ -1,0 +1,125 @@
+<style>
+    .registercontainer {
+        width: 60%;
+        margin: auto;
+    }
+    .bg-image {
+		background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+		background-size: cover;
+		height: 40vh;
+	}
+    @media screen and (max-width: 800px) {
+        .registercontainer {
+            width: 100%;
+            margin: auto;
+        }
+    }
+</style>
+
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image"></div>
+    <!-- Background image -->
+    <div class="registercontainer">
+        <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+                  margin-top: -100px;
+                  background: hsla(0, 0%, 100%, 0.8);
+                  backdrop-filter: blur(30px);
+                  ">
+            <div class="card-body py-5 px-md-5">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-5">Register now</h2>
+                        <form action="/api/agents/register" method="post">
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="agency" class="form-control" name="agency"
+                                    placeholder="Agency Name" required />
+                            </div>
+                            
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="fullname" class="form-control" name="fullname"
+                                    placeholder="Full Name" required />
+                            </div>
+
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="agentname" class="form-control" name="agentname"
+                                    placeholder="Agent Name" required />
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" id="email" class="form-control" name="email"
+                                    placeholder="example@email.com" required />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="password" class="form-control" name="password"
+                                    placeholder="Password" required />
+                            </div>
+
+                            <!-- Confirm Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="confirm_password" class="form-control" name="confirmPassword"
+                                    placeholder="Confirm Password" required />
+                            </div>
+
+                            <p class="confirmationPassword">
+
+                            </p>
+
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex justify-content-center mb-4">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33"
+                                    required />
+                                <label class="form-check-label" for="form2Example33">
+                                    I agree all statements in <a href="#!">Terms of service</a>
+                                </label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4">
+                                Register
+                            </button>
+
+                            <!-- Agent registration route -->
+                            <div>
+                                <p>Already have an agent account? <a href="/api/agents/login">Login</a></p>
+                            </div>
+                            <div>
+                                <p><a href="/api/users/register">Register as an User</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Section: Design Block -->
+
+<script>
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+    let register = document.querySelector(".btn-primary");
+
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            document.querySelector(".confirmationPassword").innerHTML = "Passwords Don't Match";
+            register.disabled = true;
+        } else {
+            document.querySelector(".confirmationPassword").innerHTML = "";
+            register.disabled = false;
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>

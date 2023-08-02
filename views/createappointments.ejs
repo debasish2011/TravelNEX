@@ -1,0 +1,104 @@
+<style>
+    .registercontainer {
+        width: 60%;
+        margin: auto;
+    }
+
+    @media screen and (max-width: 800px) {
+        .registercontainer {
+            width: 100%;
+            margin: auto;
+        }
+    }
+</style>
+
+<!-- Section: Design Block -->
+<section class="text-center">
+    <div class="registercontainer">
+        <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+				  margin-top: 100px;
+				  background: hsla(0, 0%, 100%, 0.8);
+				  backdrop-filter: blur(30px);
+				  ">
+            <div class="card-body py-5 px-md-5">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-5">Create an appointment</h2>
+                        <form action="/api/appointments/createappointments" method="post">`
+                            <!-- Agentname input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="agentname" class="form-control" name="agentname"
+                                    value="<%- agent.agentname  %>" disabled />
+                            </div>
+
+                            <!-- Date input -->
+                            <div class="form-outline mb-4">
+                                <input type="date" id="date" class="form-control" name="date" required />
+                            </div>
+
+                            <!-- Starttime input -->
+                            <div class="form-outline mb-4">
+                                <input type="time" id="starttime" class="form-control" name="starttime" required />
+                            </div>
+
+                            <!-- Endtime input -->
+                            <div class="form-outline mb-4">
+                                <input type="time" id="endtime" class="form-control" name="endtime" required />
+                            </div>
+
+                            <!-- Location input -->
+                            <div class="form-outline mb-4">
+                                <select class="form-select" name="location" id="location">
+                                    <option selected>Choose Location</option>
+                                    <option value="A">Room A</option>
+                                    <option value="B">Room B</option>
+                                    <option value="C">Room C</option>
+                                    <option value="D">Room D</option>
+                                </select>
+                            </div>
+
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4">
+                                Create Appointment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Section: Design Block -->
+
+<!-- <script>
+    // Function to create an appointment without jquery
+    async function createAppointment() {
+        // Get the values from the form
+        let date = document.getElementById("date").value;
+        let starttime = document.getElementById("starttime").value;
+        let endtime = document.getElementById("endtime").value;
+        let location = document.getElementById("location").value;
+
+        let url = "http://localhost:5000/createappointments";
+
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                date: date,
+                starttime: starttime,
+                endtime: endtime,
+                location: location
+            }),
+        });
+    };
+    function create(e) {
+        e.preventDefault();
+        createAppointment();
+    }
+</script> -->

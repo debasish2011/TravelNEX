@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="jumbotron">
+        <p class="my-3 lead">Welcome to your dashboard! <b><%- agent.agentname %></b></p>
+    </div>
+    <div class="">
+        <div class="coloum-box">
+
+        </div>
+        <div class="row-box">
+            <div id="heading">
+                <h4 class="">All Appointments</h4>
+            </div>
+            <div id="appointments-box" class="d-flex flex-row flex-wrap">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // get appointments appointments from database
+    async function getAppointments() {
+        let host = "https://travelnex.onrender.com";
+        let url = `${host}/api/appointments/fetchallappointments`;
+        let response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let appointments = await response.json();
+        return appointments;
+    }
+    let appointments = getAppointments();
+    console.log(appointments);
+    let appointmentsBox = document.getElementById("appointments-box");
+    // add appointments to appointments box
+    appointments.then((appointments) => {
+        appointments.forEach((appointment) => {
+            let appointmentBox = document.createElement("div");
+            appointmentBox.classList.add("card", "my-3", "mx-3","p-3", "col-10", "col-md-4", "col-lg-3", "col-xl-3");
+            let date = new Date(appointment.date);
+        
+            appointmentBox.innerHTML = `
+                <p>Date: ${date.toDateString()}</p>
+                <p>Time: ${appointment.start_time} - ${appointment.end_time}</p>
+                <p>Location: ${appointment.location}</p>
+                <p>Status: ${appointment.bookingStatus}</p>
+            <div id="actions" class="d-flex justify-content-end">
+                ${appointment.bookingStatus === "Cancelled" ? `<a class="px-1" href="/api/appointments/reappoint/${appointment._id}" /><i class="fa-solid fa-arrows-rotate"></i>` : ""}
+                <a class="px-1" href="/api/appointments/deleteappointments/${appointment._id}" /><i class="fa-solid fa-trash-can"></i>
+            <div/>           
+            `;
+            appointmentsBox.appendChild(appointmentBox);
+        });
+    });
+
+</script>

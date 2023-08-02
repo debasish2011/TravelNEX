@@ -1,0 +1,71 @@
+<style>
+	.registercontainer {
+		width: 60%;
+		margin: auto;
+	}
+
+	.bg-image {
+		background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+		background-size: cover;
+		height: 40vh;
+	}
+
+	@media screen and (max-width: 800px) {
+		.registercontainer {
+			width: 100%;
+			margin: auto;
+		}
+	}
+</style>
+
+<!-- Section: Design Block -->
+<section class="text-center">
+	<!-- Background image -->
+	<div class="p-5 bg-image"></div>
+	<!-- Background image -->
+	<div class="registercontainer">
+		<div class="card mx-4 mx-md-5 shadow-5-strong" style="
+				  margin-top: -100px;
+				  background: hsla(0, 0%, 100%, 0.8);
+				  backdrop-filter: blur(30px);
+				  ">
+			<div class="card-body py-5 px-md-5">
+
+				<div class="row d-flex justify-content-center">
+					<div class="col-lg-8">
+						<h2 class="fw-bold mb-5">Login now</h2>
+						<form action="/api/users/login" method="post">
+							<!-- Username input -->
+							<div class="form-outline mb-4">
+								<input type="text" id="form3Example3" class="form-control" name="username"
+									placeholder="Username" required />
+							</div>
+
+							<!-- Password input -->
+							<div class="form-outline mb-4">
+								<input type="password" id="form3Example4" class="form-control" name="password"
+									placeholder="Password" required />
+							</div>
+
+							<!-- Submit button -->
+							<button type="submit" class="btn btn-primary btn-block mb-4">
+								Login
+							</button>
+
+							<!-- Agent registration route -->
+							<div>
+								<p>Forgot Password? <a href="forgotpassword">Click Here</a></p>
+								<p>Don't have an account? <a href="/api/users/register">Register</a></p>
+							</div>
+							<div>
+								<p><a href="/api/agents/login">Login as an Travel Agent</a></p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+<!-- Section: Design Block -->

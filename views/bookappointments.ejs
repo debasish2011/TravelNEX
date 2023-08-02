@@ -1,0 +1,88 @@
+<div class="container my-4">
+    <div class="searchBox">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Agentname" id="agentname" />
+            <input type="date" class="form-control" id="date" />
+            <input type="text" class="form-control" placeholder="Location" id="location" />
+            <button class="btn btn-outline-secondary" id="button-addon2">Search</button>
+        </div>
+    </div>
+    <div id="searchResults">
+
+    </div>
+</div>
+
+
+
+
+<script>
+    // get appointments appointments from database
+    async function getAppointments() {
+        let host = "https://travelnex.onrender.com";
+        let url = `${host}/api/appointments/allappointments`;
+        let response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let appointments = await response.json();
+        return appointments;
+    }
+    let appointments = getAppointments();
+    appointments.then((appointments) => {
+        setAppointments(appointments);
+    });
+    
+    let searchButton = document.getElementById("button-addon2");
+    searchButton.addEventListener("click", () => {
+        let appointments = getAppointments();
+        appointments.then((appointments) => {
+            appointments = search(appointments);
+            setAppointments(appointments);
+        });
+    }
+    );
+
+    function search(appointments) {
+        let agentname = document.getElementById("agentname").value;
+        let date = document.getElementById("date").value;
+        let location = document.getElementById("location").value;
+        if (date != "") {
+            date = new Date(date).toDateString();
+        }
+        appointments = appointments.filter((appointment) => {
+            if (agentname != "" && appointment.agentname != agentname) {
+                return false;
+            }
+            if (date != "" && new Date(appointment.date).toDateString() != date) {
+                return false;
+            }
+            if (location != "" && appointment.location != location) {
+                return false;
+            }
+            return true;
+        });
+        return appointments;
+    }
+
+    function setAppointments(appointments) {
+        let searchResults = document.getElementById("searchResults");
+        searchResults.innerHTML = "";
+        appointments.forEach((appointment) => {
+            let appointmentBox = document.createElement("div");
+            appointmentBox.classList.add("card", "d-flex", "flex-row", "flex-wrap", "justify-content-between", "my-3", "mx-3", "p-3");
+            let date = new Date(appointment.date);
+            appointmentBox.innerHTML = `
+                <p>${appointment.agentname}</p>
+                <p>${date.toDateString()}</p>
+                <p>${appointment.start_time} - ${appointment.end_time}</p>
+                <p>${appointment.location}</p>
+                <p>${appointment.bookingStatus}</p>
+                <a class="btn btn-primary" href="/api/appointments/bookappointments/${appointment._id}" />BOOK</a>
+            `;
+            searchResults.appendChild(appointmentBox);
+        });
+    }
+
+</script>
