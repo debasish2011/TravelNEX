@@ -37,6 +37,10 @@ const agentSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    subscriber: {
+        type: Boolean,
+        default: true,
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Agent', agentSchema);
