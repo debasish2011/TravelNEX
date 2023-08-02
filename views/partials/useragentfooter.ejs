@@ -8,19 +8,11 @@
 </footer>
 
 <script>
-    //to add class fixed-bottom to footer when the page is not long enough
-    //to push the footer to the bottom of the page
-    //and to remove the class when the page is long enough
-    //to push the footer to the bottom of the page
-    $(document).ready(function () {
-        var docHeight = $(window).height();
-        var footerHeight = $('footer').height();
-        var footerTop = $('footer').position().top + footerHeight;
-        if (footerTop < docHeight) {
-            $('footer').addClass('fixed-bottom');
-        }
-        else {
-            $('footer').removeClass('fixed-bottom');
-        }
-    });
+
+    let footer = document.querySelector('footer');
+
+    
+
+    
+
 </script>
